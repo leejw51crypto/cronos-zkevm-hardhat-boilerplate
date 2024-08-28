@@ -19,6 +19,7 @@
         "@nomicfoundation/hardhat-toolbox": "^5.0.0",
         "@openzeppelin/contracts": "^4.9.5",
         "@openzeppelin/contracts-upgradeable": "^4.9.5",
-        "hardhat": "^2.22.4"
+        "hardhat": "^2.22.4",
+        "typescript": "^5.5.4"
     }
 }

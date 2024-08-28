@@ -9,6 +9,8 @@ import "@matterlabs/hardhat-zksync";
 
 // Import dotenv to read .env file
 import * as dotenv from "dotenv";
+// Add this import
+import { ethers } from "ethers";
 
 dotenv.config();
 
@@ -32,6 +34,13 @@ const config: HardhatUserConfig = {
             verifyURL:
                 "https://explorer-api.testnet.zkevm.cronos.org/api/v1/contract/verify/hardhat?apikey=" +
                 cronos_zkevm_testnet_apikey,
+            accounts: process.env.MY_MNEMONICS ? {
+                    mnemonic: process.env.MY_MNEMONICS,
+                    path: "m/44'/60'/0'/0",
+                    initialIndex: 0,
+                    count: 20,
+                    passphrase: "",
+            } : undefined,
         },
         cronosZkEvmMainnet: {
             url: "https://mainnet.zkevm.cronos.org",
@@ -48,8 +57,15 @@ const config: HardhatUserConfig = {
             verifyURL:
                 "https://explorer-api.zkevm.cronos.org/api/v1/contract/verify/hardhat?apikey=" +
                 cronos_zkevm_mainnet_apikey,
+            accounts: process.env.MY_MNEMONICS ? {
+                mnemonic: process.env.MY_MNEMONICS,
+                path: "m/44'/60'/0'/0",
+                initialIndex: 0,
+                count: 20,
+                passphrase: "",
+            } : undefined,
             httpHeaders: {
-                "X-API-KEY": process.env.X_API_KEY!,
+                "X-API-KEY": process.env.X_API_KEY || "",
             },
         },
         zkSyncSepoliaTestnet: {
