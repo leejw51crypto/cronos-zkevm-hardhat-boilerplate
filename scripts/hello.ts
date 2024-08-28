@@ -63,9 +63,20 @@ async function create_contract(hre: HardhatRuntimeEnvironment) {
   // Assuming you have the contract ABI and provider
   const contractABI = artifact.abi;
   const provider = l2Provider;
-  const helloWorldContract = new ethers.Contract(contractAddress, contractABI, provider);
-  const greeting = await helloWorldContract.getGreeting();
-  console.log("Greeting:", greeting);
+  const helloWorldContract = new ethers.Contract(contractAddress, contractABI, zkWallet);
+  
+  // Get the initial greeting
+  let greeting = await helloWorldContract.getGreeting();
+  console.log("Initial Greeting:", greeting);
+
+  // Set a new greeting
+  const newGreeting = "Hello from zkSync!";
+  await helloWorldContract.setGreeting(newGreeting);
+  console.log("Setting new greeting...");
+
+  // Get the updated greeting
+  greeting = await helloWorldContract.getGreeting();
+  console.log("Updated Greeting:", greeting);
 }
 
 async function main() {
